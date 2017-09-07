@@ -1,0 +1,25 @@
+$LOAD_PATH << '.'
+require 'csv_employees'
+require 'json_employees'
+
+pre_process do
+  puts "Start processing..."
+end
+
+source CsvEmployees, 'employees.csv'
+
+transform do |row|
+  row[:salary] = row.fetch(:salary).tr('.', '').to_f
+  row
+end
+
+transform do |row|
+  row[:age] = row.fetch(:age).to_i
+  row
+end
+
+destination JsonEmployees, 'employees.json'
+
+post_process do
+  puts "Process has finished"
+end
