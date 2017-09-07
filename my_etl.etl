@@ -7,6 +7,7 @@ pre_process do
 end
 
 source CsvEmployees, 'employees.csv'
+source CsvEmployees, 'employees-2.csv'
 
 transform do |row|
   row[:salary] = row.fetch(:salary).tr('.', '').to_f
